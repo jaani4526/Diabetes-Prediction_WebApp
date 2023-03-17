@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous" />
+  <title></title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      font-family: "Open Sans", sans-serif;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #f1f1f1;
+    }
+
+    .about-section {
+      background: url(https://media.giphy.com/media/zMQve1zBszJ3Uqsbi2/giphy.gif?cid=ecf05e47ybiag0czmglr9j5wienfpexoe67rtui4vco3sixk&rid=giphy.gif&ct=g) no-repeat left;
+      background-size: 55%;
+      background-color: #fdfdfd;
+      overflow: hidden;
+      padding: 100px 0;
+    }
+
+    .inner-container {
+      width: 55%;
+      float: right;
+      background-color: #fdfdfd;
+      padding: 150px;
+    }
+
+    .inner-container h1 {
+      margin-bottom: 30px;
+      font-size: 30px;
+      font-weight: 900;
+    }
+
+    .text {
+      font-size: 13px;
+      color: #545454;
+      line-height: 30px;
+      text-align: justify;
+      margin-bottom: 40px;
+    }
+
+    .skills {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    @media screen and (max-width:1200px) {
+      .inner-container {
+        padding: 80px;
+      }
+    }
+
+    @media screen and (max-width:1000px) {
+      .about-section {
+        background-size: 100%;
+        padding: 100px 40px;
+      }
+
+      .inner-container {
+        width: 100%;
+      }
+    }
+
+    @media screen and (max-width:600px) {
+      .about-section {
+        padding: 0;
+      }
+
+      .inner-container {
+        padding: 60px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  
+
+  <div class="about-section">
+    <div class="inner-container">
+      <h1>About Us</h1>
+      <p class="text">
+      <h4><span style="color: #ff0000;">Diabetes mellitus (DM)<img
+            src="https://html-online.com/editor/tiny4_9_11/plugins/emoticons/img/smiley-sealed.gif"
+            alt="sealed" />,</span> commonly known as just diabetes, is a group of metabolic disorders characterized by
+        a high blood sugar level over a prolonged period of time. Symptoms often include frequent urination, increased
+        thirst and increased appetite. If left untreated, diabetes can cause many health complications. Acute
+        complications can include diabetic ketoacidosis, hyperosmolar hyperglycemic state, or death. Serious long-term
+        complications include cardiovascular disease, stroke, chronic kidney disease, foot ulcers, damage to the nerves,
+        damage to the eyes and cognitive impairment.</h4>
+      </p>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<!--From https://codepen.io/frytyler/pen/EGdtg-->
+
+<head>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>Prognosting Diabetes</title>
+    <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+        .btn {
+            display: inline-block;
+            *display: inline;
+            *zoom: 1;
+            padding: 4px 10px 4px;
+            margin-bottom: 0;
+            font-size: 13px;
+            line-height: 18px;
+            color: #333333;
+            text-align: center;
+            text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+            vertical-align: middle;
+            background-color: #f5f5f5;
+            background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);
+            background-image: -ms-linear-gradient(top, #ffffff, #e6e6e6);
+            background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6));
+            background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);
+            background-image: -o-linear-gradient(top, #ffffff, #e6e6e6);
+            background-image: linear-gradient(top, #ffffff, #e6e6e6);
+            background-repeat: repeat-x;
+            filter: progid:dximagetransform.microsoft.gradient(startColorstr=#ffffff, endColorstr=#e6e6e6, GradientType=0);
+            border-color: #e6e6e6 #e6e6e6 #e6e6e6;
+            border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+            border: 1px solid #e6e6e6;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+            -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+            -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+            cursor: pointer;
+            *margin-left: .3em;
+        }
+
+        .btn:hover,
+        .btn:active,
+        .btn.active,
+        .btn.disabled,
+        .btn[disabled] {
+            background-color: #e6e6e6;
+        }
+
+        .btn-large {
+            padding: 9px 14px;
+            font-size: 15px;
+            line-height: normal;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+        }
+
+        .btn:hover {
+            color: #333333;
+            text-decoration: none;
+            background-color: #e6e6e6;
+            background-position: 0 -15px;
+            -webkit-transition: background-position 0.1s linear;
+            -moz-transition: background-position 0.1s linear;
+            -ms-transition: background-position 0.1s linear;
+            -o-transition: background-position 0.1s linear;
+            transition: background-position 0.1s linear;
+        }
+
+        .btn-primary,
+        .btn-primary:hover {
+            text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+            color: #ffffff;
+        }
+
+        .btn-primary.active {
+            color: rgba(255, 255, 255, 0.75);
+        }
+
+        .btn-primary {
+            background-color: #4a77d4;
+            background-image: -moz-linear-gradient(top, #6eb6de, #4a77d4);
+            background-image: -ms-linear-gradient(top, #6eb6de, #4a77d4);
+            background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#6eb6de), to(#4a77d4));
+            background-image: -webkit-linear-gradient(top, #6eb6de, #4a77d4);
+            background-image: -o-linear-gradient(top, #6eb6de, #4a77d4);
+            background-image: linear-gradient(top, #6eb6de, #4a77d4);
+            background-repeat: repeat-x;
+            filter: progid:dximagetransform.microsoft.gradient(startColorstr=#6eb6de, endColorstr=#4a77d4, GradientType=0);
+            border: 1px solid #3762bc;
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .btn-primary:hover,
+        .btn-primary:active,
+        .btn-primary.active,
+        .btn-primary.disabled,
+        .btn-primary[disabled] {
+            filter: none;
+            background-color: #4a77d4;
+        }
+
+        .btn-block {
+            width: 100%;
+            display: block;
+        }
+
+        * {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            -ms-box-sizing: border-box;
+            -o-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            width: 100%;
+            height: 100%;
+            font-family: 'Open Sans', sans-serif;
+            background: #cee25aa8;
+            color: rgb(0, 0, 0);
+            background-image: url("https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/c87d20d4-1cbe-42ae-b191-cc629a5b5a73/dboq3yo-39e2d1f9-502e-489f-94ba-3f12cee5ffa1.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2M4N2QyMGQ0LTFjYmUtNDJhZS1iMTkxLWNjNjI5YTViNWE3M1wvZGJvcTN5by0zOWUyZDFmOS01MDJlLTQ4OWYtOTRiYS0zZjEyY2VlNWZmYTEuZ2lmIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.1CSMTsa2L6Vqw4-WKZAWyCtv5GScUlXPeDJuDAjHsGg");
+            height: 100%;
+
+            /* Center and scale the image nicely */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+
+            font-size: 18px;
+            text-align: center;
+            letter-spacing: 1.2px;
+            background: -ms-radial-gradient(0% 100%, ellipse cover, rgba(104, 128-+138, .4) 10%, rgba(138, 114, 76, 0) 40%), -ms-linear-gradient(top, rgba(57, 173, 219, .25) 0%, rgba(42, 60, 87, .4) 100%), -ms-linear-gradient(-45deg, #670d10 0%, #092756 100%);
+
+        }
+
+        .login {
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            margin: -200px;
+            width: 400px;
+            height: 100%;
+        }
+
+
+        input {
+            width: 100%;
+            margin-bottom: 10px;
+            background: rgba(206, 201, 201, 0.473);
+            border: none;
+            outline: none;
+            padding: 10px;
+            font-size: 13px;
+            color: #fff;
+            text-shadow: 1px 1px 1px rgb(0, 0, 0);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+            box-shadow: inset 0 -5px 45px rgb(255, 255, 255), 0 1px 1px rgb(255, 255, 255);
+            -webkit-transition: box-shadow .5s ease;
+            -moz-transition: box-shadow .5s ease;
+            -o-transition: box-shadow .5s ease;
+            -ms-transition: box-shadow .5s ease;
+            transition: box-shadow .5s ease;
+        }
+
+        .button {
+            background-color: #4CAF50;
+            /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+        }
+
+        input:focus {
+            box-shadow: inset 0 -5px 45px rgba(170, 210, 255, 0.986), 0 1px 1px rgba(170, 210, 255, 0.986);
+        }
+    </style>
+
+
+
+</head>
+
+
+
+
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">Diabetes Prediction</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/dataset">Dataset</a>
+                    </li>
+                </ul>
+                <form class="d-flex">
+
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <div class="login">
+        <strong>
+            <h1>𝓓𝓲𝓪𝓫𝓮𝓽𝓮𝓼 𝓡𝓲𝓼𝓴 𝓟𝓻𝓮𝓭𝓲𝓬𝓽𝓲𝓸𝓷
+        </strong></h1>
+
+        <form action="{{ url_for('predict')}}" method="post">
+            <input class="form-input" class = "button" type="text" name="pregnancies" placeholder="Number of Pregnancies eg. 0 for male"
+                required><br>
+            <input class="form-input" type="text" name="glucose"
+                placeholder="Glucose (mg/dL) eg. 80" required><br>
+            <input class="form-input" type="text" name="bloodpressure"
+                placeholder="Blood Pressure (mmHg) eg. 80" required><br>
+            <input class="form-input" type="text" name="skinthickness"
+                placeholder="Skin Thickness (mm) eg. 20" required><br>
+            <input class="form-input" type="text" name="insulin"
+                placeholder="Insulin Level (IU/mL) eg. 80" required><br>
+            <input class="form-input" type="text" name="bmi"
+                placeholder="Body Mass Index (kg/m²) eg. 23.1" required><br>
+            <input class="form-input" type="text" name="dpf"
+                placeholder="Diabetes Pedigree Function eg. 0.52" required><br>
+            <input class="form-input" type="text" name="age"
+                placeholder="Age (years) eg. 34" required><br>
+            <button type="submit" class="btn btn-outline-warning" required>Predict</button>
+        </form>
+        <br>
+        <br>
+        {{ prediction_text }}
+    </div>
+    <footer class="mt-auto text-center fixed-bottom">
+        <p>Designed by <a href="https://www.linkedin.com/in/kartikey-paliwal-b384b6203/" class="text-black">@Kartikey Paliwal
+                </a>.<br> Github : <a href="https://github.com/jaani4526" class="text-black">Kargit</p>
+    </footer>
+
+</body>
+
+</html>
+</html>
